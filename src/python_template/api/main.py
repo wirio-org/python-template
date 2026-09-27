@@ -22,9 +22,7 @@ services = ServiceCollection()
 services.configure_fastapi(app)
 
 if not services.environment.is_local():
-    services.settings.add_azure_key_vault(
-        services.settings.get_required_value("key_vault_url")
-    )
+    services.settings.add_azure_key_vault(services.settings.get_value("key_vault_url"))
 
 application_settings = services.settings.get_model(ApplicationSettings)
 logging.basicConfig(level=application_settings.logging_level)
